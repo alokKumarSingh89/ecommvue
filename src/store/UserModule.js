@@ -39,6 +39,7 @@ export const UserModule = {
                 }
                 commit(FTECH_USER, users);
                 
+                
             })
         },
         RE_GENERATE_TOKEN({commit}){
