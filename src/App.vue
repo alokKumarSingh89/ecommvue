@@ -6,7 +6,7 @@
       class="hidden-sm-and-up"
       ></v-toolbar-side-icon>
       <v-toolbar-title>
-        <router-link to="/" tag="span" style="cursor:pointer"> {{title}}</router-link>
+        <router-link :to="rootUrl" tag="span" style="cursor:pointer"> {{title}}</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
@@ -22,8 +22,8 @@
       </div>
       <router-view></router-view>
     </main>
-    <v-footer app color="blue lighten-2" style="text-align:center" dark>
-      <span style="margin:auto">&copy; 2017</span>
+    <v-footer app color="blue" style="text-align:center" dark>
+      <span style="margin:auto">&copy; {{new Date().getFullYear()}}</span>
     </v-footer>
   </v-app>
 </template>
@@ -41,7 +41,8 @@ export default {
   computed: {
     ...mapState({
       user: state => state.user.user,
-      loading:state=>state.loading
+      loading:state=>state.loading,
+      rootUrl:state=>state.rootUrl
     })
   },
   name: "App",

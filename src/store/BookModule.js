@@ -1,7 +1,7 @@
 import firebase from 'firebase'
 import axios from 'axios'
 let _ = require('lodash')
-import { ADD_BOOK, FETCH_BOOK } from '@/store/actionType'
+import { ADD_BOOK, FETCH_BOOK, UPDATE_BOOK } from '@/store/actionType'
 export const BookModule = {
     state: {
         books: []
@@ -12,8 +12,8 @@ export const BookModule = {
         }
     },
     actions: {
-        CheckBookStore({commit,state}){
-            if(state.books.length == 0){
+        CheckBookStore({ commit, state }) {
+            if (state.books.length == 0) {
                 this.dispatch(FETCH_BOOK)
             }
         },
@@ -31,7 +31,7 @@ export const BookModule = {
             return new Promise((resolve, reject) => {
                 const book = _.findIndex(state.books, { 'isbn': payload.isbn })
                 if (book > 0) {
-                    reject({message:'Book Already Exits'})
+                    reject({ message: 'Book Already Exits' })
                     commit('Loading', false);
                 } else {
                     firebase.database().ref('books').push(payload)
@@ -46,7 +46,31 @@ export const BookModule = {
                 }
 
             })
-
+        },
+        [UPDATE_BOOK]({ commit }, payload) {
+            commit('Loading', true)
+            return new Promise((resolve, reject) => {
+                var key = payload.id
+                delete payload.id
+                firebase.database().ref('books/'+key).update(payload)
+                    .then(response => {
+                        resolve(response)
+                        commit('Loading', false);
+                    })
+                    .catch(error => {
+                        reject(error)
+                        commit('Loading', false);
+                    })
+            })
+        }
+    },
+    getters: {
+        getBook(state) {
+            return (id) => {
+                return state.books.find((book) => {
+                    return book.id == id
+                })
+            }
         }
     }
 }

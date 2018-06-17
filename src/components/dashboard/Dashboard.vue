@@ -8,7 +8,7 @@
                             <v-list-tile-avatar>
                                 <img src="https://randomuser.me/api/portraits/men/85.jpg" >
                             </v-list-tile-avatar>
-                            <v-list-tile-content>
+                            <v-list-tile-content v-if="user">
                                 <v-list-tile-title>{{user.firstName}} {{user.lastName}}</v-list-tile-title>
                             </v-list-tile-content>
                         </v-list-tile>
@@ -22,7 +22,7 @@
                         </v-list-tile-action>
                         <v-list-tile-content>
                             <v-list-tile-title>
-                                <router-link :to=item.link class="white--text">{{ item.title }}</router-link>
+                                <router-link :to=item.link class="white--text a_text">{{ item.title }}</router-link>
                             </v-list-tile-title>
                         </v-list-tile-content>
                     </v-list-tile>
@@ -42,8 +42,14 @@ export default {
   computed: {
     ...mapState({
       user: state => state.user.user,
-      menu: state=>state.dashboad.menu
+      menu: state => state.dashboad.menu
     })
   }
 };
 </script>
+<style>
+.a_text {
+  text-decoration: none;
+}
+</style>
+

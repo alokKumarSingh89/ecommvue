@@ -9,7 +9,7 @@
                     <v-alert :value=errorMsg :color=errorType outline>
                         {{errorMsg}}
                     </v-alert>
-                    <h4>Login</h4>
+                    <h2 class="blue--text">Login</h2>
                     <v-text-field v-model="email" :rules="emailRules" label="E-mail"
                         required>
                     </v-text-field>
@@ -18,12 +18,12 @@
                     </v-text-field>
                     <v-layout row wrap>
                         <v-flex xs4>
-                            <v-btn :disabled="!valid" color="red" dark outline=""
+                            <v-btn :disabled="!valid" color="blue" dark outline=""
                                 @click="submit">submit
                             </v-btn>
                         </v-flex>
                         <v-flex xs6>
-                            <v-btn flat color="red" to="/signup">Register to your self</v-btn>
+                            <v-btn flat color="blue" to="/signup">Register to your self</v-btn>
                         </v-flex>
                     </v-layout>
                     
@@ -85,7 +85,7 @@ export default {
   padding: 0;
 }
 .bcimg {
-  /* background-image: url("../../assets/login.jpg"); */
+  background-image: url("/static/home.jpg");
   height: 86.5vh;
   width: 100%;
   background-repeat: no-repeat;

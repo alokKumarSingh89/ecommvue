@@ -8,11 +8,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state:{
-        loading:false
+        loading:false,
+        rootUrl:'/'
     },
     mutations:{
         Loading(state,payload){
             state.loading = payload
+        },
+        setRootUrl(state,payload){
+            state.rootUrl = payload
         }
     },
     modules:{

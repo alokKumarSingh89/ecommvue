@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import SignIn from '@/components/users/Signin'
 import SignUp from '@/components/users/Signup'
+import UserList from '@/components/users/UserList'
 import EditProfile from '@/components/users/EditProfile'
 import Profile from '@/components/users/Profile'
 import DashBoard from '@/components/dashboard/Dashboard'
@@ -10,6 +11,7 @@ import DashBoardIndex from '@/components/dashboard/DashBoardIndex'
 
 import NewBook from '@/components/book/NewBook';
 import Books from '@/components/book/Books';
+import EditBook from '@/components/book/EditBook';
 
 Vue.use(Router)
 
@@ -18,7 +20,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
+      name: 'Home',
       component: HelloWorld
     },
     {
@@ -59,6 +61,16 @@ export default new Router({
           path:'books',
           name:'BookList',
           component:Books
+        },
+        {
+          path:'book/:id',
+          name:'EditBook',
+          component:EditBook
+        },
+        {
+          path:'user-managment',
+          name:'UserManagment',
+          component:UserList
         }
       ]
     }

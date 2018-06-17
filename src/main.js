@@ -6,7 +6,7 @@ import firebase from 'firebase';
 import 'vuetify/dist/vuetify.min.css'
 import store from '@/store';
 Vue.use(Vuetify)
-import {INIT,SET_USER} from '@/store/actionType'
+import { INIT, SET_USER } from '@/store/actionType'
 Vue.config.productionTip = false
 import interceptor from '@/helper/interceptor'
 interceptor(store)
@@ -16,8 +16,10 @@ new Vue({
   router,
   store,
   render: h => h(App),
-  beforeCreate(){
+  beforeCreate() {
     this.$store.dispatch(INIT)
+    let currentPAth = this.$route.path;
+    this.$router.push('/')
     var config = {
       apiKey: "AIzaSyAYsOjNVJe4xTCk7sc45-QlBF-xpCsVyO0",
       authDomain: "vuelibrary-17ec0.firebaseapp.com",
@@ -27,11 +29,14 @@ new Vue({
       messagingSenderId: "826809509361"
     };
     firebase.initializeApp(config);
-    firebase.auth().onAuthStateChanged(user=>{
-      if(user)
-      this.$store.dispatch(SET_USER)
-      if(this.$route.name == 'Home')
-        this.$router.push('/dashbord')
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch(SET_USER)
+        if (this.$route.name == 'Home')
+          this.$router.push('/dashbord')
+          this.$router.push(currentPAth)
+      }
+
     })
   }
 })
