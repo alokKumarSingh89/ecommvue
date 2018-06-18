@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+import store from '@/store'
+
 import HelloWorld from '@/components/HelloWorld'
 import SignIn from '@/components/users/Signin'
 import SignUp from '@/components/users/Signup'
@@ -9,11 +12,21 @@ import Profile from '@/components/users/Profile'
 import DashBoard from '@/components/dashboard/Dashboard'
 import DashBoardIndex from '@/components/dashboard/DashBoardIndex'
 
+
 import NewBook from '@/components/book/NewBook';
 import Books from '@/components/book/Books';
 import EditBook from '@/components/book/EditBook';
 
 Vue.use(Router)
+
+function checkRole(to,from, next){
+  if(store.state.user.user && store.state.user.user.role == 1){
+    next()
+  }else{
+    next('/dashbord')
+  }
+  
+}
 
 export default new Router({
   scrollBehavior: () => ({ y: 0 }),
@@ -55,7 +68,8 @@ export default new Router({
         {
           path:'add-book',
           name:'NewBook',
-          component:NewBook
+          component:NewBook,
+          beforeEnter:checkRole
         },
         {
           path:'books',
@@ -65,12 +79,14 @@ export default new Router({
         {
           path:'book/:id',
           name:'EditBook',
-          component:EditBook
+          component:EditBook,
+          beforeEnter:checkRole
         },
         {
           path:'user-managment',
           name:'UserManagment',
-          component:UserList
+          component:UserList,
+          beforeEnter:checkRole
         }
       ]
     }

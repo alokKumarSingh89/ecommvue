@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-toolbar dark class="blue lighten-1">
+    <v-toolbar dark class="blue lighten-1" v-if="user">
       <v-toolbar-side-icon 
       @click.stop="sideNav = !sideNav"
       class="hidden-sm-and-up"
@@ -10,7 +10,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat @click="logOut" v-if="user">
+        <v-btn flat @click="logOut">
           <v-icon left>exit_to_app</v-icon>
           Logout
         </v-btn>
@@ -49,7 +49,7 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch(LOG_OUT);
-      this.$router.push("/signin");
+      this.$router.push("/");
     }
   }
 };

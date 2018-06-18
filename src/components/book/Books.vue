@@ -14,12 +14,12 @@
                     <td>{{ props.item.category }}</td>
                     <td>{{ props.item.noOfCopy }}</td>
                     <td>{{ props.item.pubish }}</td>
-                    <td>
+                    <td v-if="user.role == 1">
                       <v-btn dark fab color="blue" small :to="'/dashbord/book/'+props.item.id">
                         <v-icon>edit</v-icon>
                       </v-btn>
                     </td>
-                    <td>
+                    <td v-if="user.role == 1">
                       <v-btn fab small color="red" dark @click="delete(props.item)">
                         <v-icon>delete</v-icon>
                       </v-btn>
@@ -61,7 +61,8 @@ export default {
   computed: {
     ...mapState({
       token: state => state.user.token,
-      books: state => state.books.books
+      books: state => state.books.books,
+      user: state => state.user.user
     }),
     loadData() {
       if (this.token) {

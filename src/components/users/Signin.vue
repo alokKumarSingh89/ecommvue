@@ -1,10 +1,10 @@
 <template>
     <v-container fluid class="no-padding">
         <v-layout row wrap>
-            <v-flex xs8>
+            <v-flex xs0 md8>
                 <div class="bcimg"></div>
             </v-flex>
-            <v-flex xs4>
+            <v-flex xs12 md4>
                 <v-form ref="form" v-model="valid" lazy-validation>
                     <v-alert :value=errorMsg :color=errorType outline>
                         {{errorMsg}}
@@ -86,7 +86,7 @@ export default {
 }
 .bcimg {
   background-image: url("/static/home.jpg");
-  height: 86.5vh;
+  height: 100vh;
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;

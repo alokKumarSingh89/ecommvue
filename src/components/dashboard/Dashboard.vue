@@ -16,7 +16,7 @@
                 </v-toolbar>
                 <v-divider></v-divider>
                 <v-list class="pt-0">
-                    <v-list-tile v-for="item in menu" :key="item.title">
+                    <v-list-tile v-for="item in menu" :key="item.title" v-if="user.role == 1 || user.role == item.role ">
                         <v-list-tile-action>
                             <v-icon>{{ item.icon }}</v-icon>
                         </v-list-tile-action>

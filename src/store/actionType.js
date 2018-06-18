@@ -6,6 +6,7 @@ export const LOG_OUT = 'Logout'
 export const SETUP_USER_ACCOUT_DETAIL = 'firstUserSetup'
 export const UPDATE_PROFILE = 'UpdateUserProfile'
 export const FTECH_USER  = 'fetch_user_list'
+export const UPDATE_USER = 'update_user'
 
 
 // Books

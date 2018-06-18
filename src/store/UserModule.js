@@ -2,7 +2,7 @@
 import {
     INIT, SET_USER, SIGN_IN, LOG_OUT,
     SIGN_UP,SETUP_USER_ACCOUT_DETAIL,
-    UPDATE_PROFILE,FTECH_USER
+    UPDATE_PROFILE,FTECH_USER,UPDATE_USER
 } from '@/store/actionType';
 import firebase from 'firebase'
 import axios from 'axios'
@@ -27,13 +27,14 @@ export const UserModule = {
         }
     },
     actions: {
-        [FTECH_USER]({commit},payload){
+        [FTECH_USER]({commit,state},payload){
             axios.get('/users.json')
             .then(result=>{
                 let users = [];
                 for(let key in result.data){
+                    if(state.user.fid == key) continue
                     users.push({
-                        id:key,
+                        key,
                         ...result.data[key]
                     })
                 }
@@ -46,6 +47,15 @@ export const UserModule = {
             firebase.auth().currentUser.getIdToken().then(result=>{
                 commit('SETUP_TOKEN',result)
             })
+        },
+        [UPDATE_USER]({commit},payload){
+            commit('Loading',true)
+            axios.put('/users/'+payload.key+'.json',payload)
+            .then((result)=>{
+                commit('Loading',false)
+                console.log(result)
+            })
+            console.log(payload)
         },
         [INIT]({ commit }, payload) {
             let user = JSON.parse(localStorage.getItem('data'))
@@ -109,7 +119,7 @@ export const UserModule = {
         [SETUP_USER_ACCOUT_DETAIL]({ commit }, payload) {
             firebase.database().ref('users/' + payload.user.uid).set({
                 role: '',
-                firstName: '',
+                firstName: payload.user.email,
                 lastName: '',
                 id: '',
                 phone: '',

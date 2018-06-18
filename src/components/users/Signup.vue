@@ -103,7 +103,7 @@ export default {
 }
 .bcimg {
   background-image: url("/static/home.jpg");
-  height: 86.5vh;
+  height: 100vh;
   width: 100%;
   background-repeat: no-repeat;
   background-position: center;
